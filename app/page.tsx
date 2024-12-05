@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 import { GrSend } from "react-icons/gr";
 import { useChatMessages } from "./hook/useChat";
 export default function Home() {
-  const { messages, input, isLoading, setInput, handleSubmit } =
+  const { messages, input, isLoading, setInput, handleSubmit, fetchToken } =
     useChatMessages();
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -18,6 +18,10 @@ export default function Home() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    fetchToken();
+  }, []);
 
   return (
     <div className="bg-white h-[100dvh]">

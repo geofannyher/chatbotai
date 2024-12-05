@@ -38,8 +38,7 @@ export const useChatMessages = () => {
         ...prevMessages,
         {
           role: "assistant",
-          // content: data.data.content || "AI sedang ada kesalahan",
-          content: "AI sedang ada kesalahan",
+          content: data.data.content || "AI sedang ada kesalahan",
         },
       ]);
     } catch (error) {
@@ -50,6 +49,23 @@ export const useChatMessages = () => {
       ]);
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const fetchToken = async () => {
+    try {
+      const response = await fetch("/api/token", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch AI response");
+      }
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
     }
   };
 
@@ -92,6 +108,7 @@ export const useChatMessages = () => {
   // };
 
   return {
+    fetchToken,
     messages,
     input,
     isLoading,

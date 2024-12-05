@@ -6,8 +6,7 @@ export async function GET() {
   if (token?.value) {
     return NextResponse.json({ data: "sudah login" });
   } else {
-    const username = "ninja";
-    const body = { remote_id: "12", username: username };
+    const body = { remote_id: "12", username: "ninja" };
     try {
       const res = await fetch(`${process.env.AVATARA_URL}/auth`, {
         method: "POST",
