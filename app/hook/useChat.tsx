@@ -18,44 +18,77 @@ export const useChatMessages = () => {
       await fetchAIResponse(input);
     }
   };
-
   const fetchAIResponse = async (userMessage: string) => {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      body: JSON.stringify({ message: userMessage }),
-    });
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userMessage }),
+      });
 
-    if (response.body && response.body instanceof ReadableStream) {
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let result = "";
+      if (!response.ok) {
+        throw new Error("Failed to fetch AI response");
+      }
 
-      reader
-        .read()
-        .then(function processText({ done, value }) {
-          if (done) {
-            const data = JSON.parse(result);
-            setMessages((prevMessages) => [
-              ...prevMessages,
-              {
-                role: "assistant",
-                content: data.data.content
-                  ? data.data.content
-                  : "AI sedang ada kesalahan",
-              },
-            ]);
-            setIsLoading(false);
-            return;
-          }
-          result += decoder.decode(value, { stream: true });
-          reader.read().then(processText);
-        })
-        .catch((error) => {
-          console.error("Error reading stream:", error);
-          setIsLoading(false);
-        });
+      const data = await response.json();
+
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        {
+          role: "assistant",
+          content: data.data.content || "AI sedang ada kesalahan",
+        },
+      ]);
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { role: "assistant", content: "Terjadi kesalahan, coba lagi." },
+      ]);
+    } finally {
+      setIsLoading(false);
     }
   };
+
+  // const fetchAIResponse = async (userMessage: string) => {
+  //   const response = await fetch("/api/chat", {
+  //     method: "POST",
+  //     body: JSON.stringify({ message: userMessage }),
+  //   });
+
+  //   if (response.body && response.body instanceof ReadableStream) {
+  //     const reader = response.body.getReader();
+  //     const decoder = new TextDecoder();
+  //     let result = "";
+
+  //     reader
+  //       .read()
+  //       .then(function processText({ done, value }) {
+  //         if (done) {
+  //           const data = JSON.parse(result);
+  //           setMessages((prevMessages) => [
+  //             ...prevMessages,
+  //             {
+  //               role: "assistant",
+  //               content: data.data.content
+  //                 ? data.data.content
+  //                 : "AI sedang ada kesalahan",
+  //             },
+  //           ]);
+  //           setIsLoading(false);
+  //           return;
+  //         }
+  //         result += decoder.decode(value, { stream: true });
+  //         reader.read().then(processText);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error reading stream:", error);
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // };
 
   return {
     messages,
