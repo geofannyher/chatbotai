@@ -17,6 +17,7 @@ export async function POST(req: Request) {
         body: JSON.stringify({ message: data.message }),
       }
     );
+    console.log(response);
 
     if (!response.ok) {
       throw new Error("API request failed");
