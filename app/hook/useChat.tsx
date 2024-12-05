@@ -33,12 +33,13 @@ export const useChatMessages = () => {
       }
 
       const data = await response.json();
-
+      console.log(data, "ada");
       setMessages((prevMessages) => [
         ...prevMessages,
         {
           role: "assistant",
-          content: data.data.content || "AI sedang ada kesalahan",
+          // content: data.data.content || "AI sedang ada kesalahan",
+          content: "AI sedang ada kesalahan",
         },
       ]);
     } catch (error) {
