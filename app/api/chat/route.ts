@@ -1,26 +1,19 @@
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 export async function POST(req: Request) {
-  const cookieStore = cookies();
-  const token = cookieStore.get("token");
   const data = await req.json();
   try {
     const response = await fetch(
-      `${process.env.AVATARA_URL}/metered/conversations/2pmPlrB9pby2XOA3Z5f7HEdBCsk/chat`,
+      `${process.env.NEXT_PUBLIC_AVATARA_URl}/metered/conversations/2pmPlrB9pby2XOA3Z5f7HEdBCsk/chat`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token?.value}`,
+          Authorization: `Bearer ${data?.token}`,
           apiKey: process.env.AVATARA_KEY!,
         },
         body: JSON.stringify({ message: data.message }),
       }
     );
-
-    if (!response.ok) {
-      throw new Error("API request failed");
-    }
 
     const dataResponse = await response.json();
 

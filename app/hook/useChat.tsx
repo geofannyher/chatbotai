@@ -19,21 +19,20 @@ export const useChatMessages = () => {
     }
   };
   const fetchAIResponse = async (userMessage: string) => {
+    const token = localStorage.getItem("token");
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({ message: userMessage, token }),
       });
 
       if (!response.ok) {
         throw new Error("Failed to fetch AI response");
       }
-
       const data = await response.json();
-      console.log(data, "ada");
       setMessages((prevMessages) => [
         ...prevMessages,
         {
@@ -53,19 +52,25 @@ export const useChatMessages = () => {
   };
 
   const fetchToken = async () => {
-    try {
-      const response = await fetch("/api/token", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch AI response");
+    const token = localStorage.getItem("token");
+    if (token) {
+      return null;
+    } else {
+      try {
+        const response = await fetch("/api/token", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        localStorage.setItem("token", data.data);
+        if (!response.ok) {
+          throw new Error("Failed to fetch AI response");
+        }
+      } catch (error) {
+        console.error("Error fetching AI response:", error);
       }
-    } catch (error) {
-      console.error("Error fetching AI response:", error);
     }
   };
 
