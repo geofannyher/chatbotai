@@ -29,11 +29,19 @@ export default function Home() {
       <div className="container mx-auto max-w-[500px] h-full shadow-xl shadow-gray-400 bg-zinc-100 flex flex-col">
         <nav className="w-full border-b-2 flex justify-between p-4 text-violet-900">
           <div className="flex gap-4 items-center">
-            <img
-              src={imgurl}
-              alt="female"
-              className="object-cover w-10 h-10 rounded-full"
-            />
+            <div className="relative">
+              <img
+                src={imgurl}
+                alt="female"
+                className="shadow-lg object-cover w-10 h-10 rounded-full"
+              />
+              <div className="absolute top-0 right-0">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+              </div>
+            </div>
             <div className="flex flex-col">
               <p className="font-bold">Rahayu</p>
               <p className="text-sm">Real Person</p>
