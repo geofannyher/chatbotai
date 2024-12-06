@@ -74,44 +74,6 @@ export const useChatMessages = () => {
     }
   };
 
-  // const fetchAIResponse = async (userMessage: string) => {
-  //   const response = await fetch("/api/chat", {
-  //     method: "POST",
-  //     body: JSON.stringify({ message: userMessage }),
-  //   });
-
-  //   if (response.body && response.body instanceof ReadableStream) {
-  //     const reader = response.body.getReader();
-  //     const decoder = new TextDecoder();
-  //     let result = "";
-
-  //     reader
-  //       .read()
-  //       .then(function processText({ done, value }) {
-  //         if (done) {
-  //           const data = JSON.parse(result);
-  //           setMessages((prevMessages) => [
-  //             ...prevMessages,
-  //             {
-  //               role: "assistant",
-  //               content: data.data.content
-  //                 ? data.data.content
-  //                 : "AI sedang ada kesalahan",
-  //             },
-  //           ]);
-  //           setIsLoading(false);
-  //           return;
-  //         }
-  //         result += decoder.decode(value, { stream: true });
-  //         reader.read().then(processText);
-  //       })
-  //       .catch((error) => {
-  //         console.error("Error reading stream:", error);
-  //         setIsLoading(false);
-  //       });
-  //   }
-  // };
-
   return {
     fetchToken,
     messages,

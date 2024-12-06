@@ -22,29 +22,27 @@ export default function Home() {
   useEffect(() => {
     fetchToken();
   }, []);
-
+  const imgurl =
+    "https://res.cloudinary.com/dcd1jeldi/image/upload/v1733474203/Rahayu3x4New_hkwqjt.png";
   return (
     <div className="bg-white h-[100dvh]">
-      {/* Kontainer Utama */}
       <div className="container mx-auto max-w-[500px] h-full shadow-xl shadow-gray-400 bg-zinc-100 flex flex-col">
-        {/* Navbar */}
         <nav className="w-full border-b-2 flex justify-between p-4 text-violet-900">
           <div className="flex gap-4 items-center">
             <img
-              src="https://cdn.pixabay.com/photo/2024/05/28/16/39/female-8794201_960_720.png"
+              src={imgurl}
               alt="female"
               className="object-cover w-10 h-10 rounded-full"
             />
             <div className="flex flex-col">
-              <p className="font-bold">Owdi</p>
+              <p className="font-bold">Rahayu</p>
               <p className="text-sm">Real Person</p>
             </div>
           </div>
         </nav>
 
-        {/* Kontainer Chat */}
         <div className="flex-grow flex flex-col justify-between overflow-hidden">
-          <div className="flex-grow overflow-y-auto px-4 pt-5 pb-14">
+          <div className="flex-grow overflow-y-auto px-4 pt-5 mb-20">
             {messages.length > 0 ? (
               <div className="flex flex-col gap-8 text-sm items-center">
                 {messages.map((message, index) => (
@@ -65,43 +63,60 @@ export default function Home() {
                         message.role === "user" ? "flex-row-reverse" : ""
                       } items-center gap-2`}
                     >
-                      {/* Icon */}
-                      <div className="size-[24px] flex justify-center items-center text-zinc-800">
+                      <div className="flex justify-center items-center text-zinc-800">
                         {message.role === "assistant" ? (
-                          <BotIcon />
+                          <img
+                            src={imgurl}
+                            alt="assistant"
+                            className="object-cover w-7 h-7 rounded-full"
+                          />
                         ) : (
                           <UserIcon />
                         )}
                       </div>
 
-                      {/* Bubble Chat */}
                       <div
-                        className={`rounded-lg px-4 py-2 max-w-[80%] ${
+                        className={`relative rounded-lg px-4 py-2 max-w-[80%] ${
                           message.role === "assistant"
-                            ? "bg-main text-second rounded-tl-none"
-                            : "bg-second text-main rounded-tr-none"
+                            ? "bg-main text-second"
+                            : "bg-second text-main"
                         }`}
                       >
                         <Markdown>{message.content}</Markdown>
+
+                        <div
+                          className={`absolute w-0 h-0 border-l-8 border-r-8 ${
+                            message.role === "assistant"
+                              ? "border-t-8 border-t-main border-r-[#f4f4f5] border-l-[#f4f4f5] top-full transform -translate-x-1/2"
+                              : "border-t-8 border-t-second border-r-[#f4f4f5] border-l-[#f4f4f5] top-full transform translate-x-1/2"
+                          }`}
+                        ></div>
                       </div>
                     </div>
                   </motion.div>
                 ))}
 
-                {/* Loading Bubble */}
                 {isLoading &&
                   messages[messages.length - 1]?.role !== "assistant" && (
                     <div className="flex flex-row gap-2 w-full">
-                      <div className="size-[24px] flex justify-center items-center text-zinc-800">
-                        <BotIcon />
-                      </div>
-                      <div className="bg-main px-4 py-2 rounded-lg rounded-tl-none text-second">
-                        hmm...
+                      <img
+                        src={imgurl}
+                        alt="assistant"
+                        className="object-cover w-7 h-7 rounded-full"
+                      />
+
+                      <div className="relative bg-main px-4 py-2 rounded-lg text-second">
+                        <div className="flex justify-center items-center gap-1 mt-2">
+                          <div className="ball"></div>
+                          <div className="ball"></div>
+                          <div className="ball"></div>
+                        </div>
+
+                        <div className="absolute w-0 h-0 border-l-8 border-r-8 border-t-8 border-t-main border-r-[#f4f4f5] border-l-[#f4f4f5] top-full transform -translate-x-1/2"></div>
                       </div>
                     </div>
                   )}
 
-                {/* Scroll Reference */}
                 <div ref={messagesEndRef} />
               </div>
             ) : (
@@ -117,7 +132,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Input Chat */}
         <div className="fixed w-full left-0 bottom-3">
           <form
             className="flex w-full flex-col gap-2 items-center"
