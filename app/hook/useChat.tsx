@@ -33,11 +33,14 @@ export const useChatMessages = () => {
         throw new Error("Failed to fetch AI response");
       }
       const data = await response.json();
+      const aiContent =
+        data?.data?.content ||
+        "Maaf sepertinya aku sedang tidak bisa menjawab karena ada kesalahan";
       setMessages((prevMessages) => [
         ...prevMessages,
         {
           role: "assistant",
-          content: data.data.content || "AI sedang ada kesalahan",
+          content: aiContent,
         },
       ]);
     } catch (error) {
