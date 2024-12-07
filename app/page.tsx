@@ -23,7 +23,7 @@ export default function Home() {
     fetchToken();
   }, []);
   const imgurl =
-    "https://res.cloudinary.com/dcd1jeldi/image/upload/v1733474203/Rahayu3x4New_hkwqjt.png";
+    "https://res.cloudinary.com/dcd1jeldi/image/upload/v1733550876/WhatsApp_Image_2024-12-06_at_11.18.19_PM_fqemyd.jpg";
   return (
     <div className="bg-white h-[100dvh]">
       <div className="container mx-auto max-w-[500px] h-full shadow-xl shadow-gray-400 bg-zinc-100 flex flex-col">
@@ -43,8 +43,8 @@ export default function Home() {
               </div>
             </div>
             <div className="flex flex-col">
-              <p className="font-bold">Rahayu</p>
-              <p className="text-sm">Real Person</p>
+              <p className="font-bold">Azril</p>
+              <p className="text-sm">Anak Magang Ekraf</p>
             </div>
           </div>
         </nav>
@@ -96,7 +96,7 @@ export default function Home() {
                           className={`absolute w-0 h-0 border-l-8 border-r-8 ${
                             message.role === "assistant"
                               ? "border-t-8 border-t-main border-r-[#f4f4f5] border-l-[#f4f4f5] top-full transform -translate-x-1/2"
-                              : "border-t-8 border-t-second border-r-[#f4f4f5] border-l-[#f4f4f5] top-full transform translate-x-1/2"
+                              : "border-t-8 border-t-second right-5 border-r-[#f4f4f5] border-l-[#f4f4f5] top-full transform translate-x-1/2"
                           }`}
                         ></div>
                       </div>
