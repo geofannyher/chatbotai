@@ -20,7 +20,7 @@
 
   const welcomeText = document.createElement("div");
   welcomeText.textContent =
-    "Selamat datang! Saya asisten virtual Anda untuk mendukung inovasi dan pengembangan ekonomi kreatif di Indonesia dan siap membantu anda dengan informasi yang cepat dan tepat";
+    "Selamat datang! Azril di sini, anak magang virtual yang siap bantu Kakak ngeksplor dunia ekonomi kreatif Indonesia. Kalau cari info yang cepat, tepat, dan pastinya seru, Azril nih jagonya!";
   welcomeText.style.position = "fixed";
   welcomeText.style.fontFamily = "'Mulish', sans-serif";
   welcomeText.style.bottom = "100px";
