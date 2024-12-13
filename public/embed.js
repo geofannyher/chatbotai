@@ -4,7 +4,7 @@
 
   const button = document.createElement("img");
   button.src =
-    "https://res.cloudinary.com/dcd1jeldi/image/upload/v1733550876/WhatsApp_Image_2024-12-06_at_11.18.19_PM_fqemyd.jpg";
+    "https://res.cloudinary.com/dcd1jeldi/image/upload/v1734088135/6260258633623388354_u22rwh.jpg";
   button.alt = "Chat";
   button.style.position = "fixed";
   button.style.objectFit = "cover";

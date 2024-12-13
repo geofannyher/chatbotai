@@ -23,7 +23,7 @@ export default function Home() {
     fetchToken();
   }, []);
   const imgurl =
-    "https://res.cloudinary.com/dcd1jeldi/image/upload/v1733550876/WhatsApp_Image_2024-12-06_at_11.18.19_PM_fqemyd.jpg";
+    "https://res.cloudinary.com/dcd1jeldi/image/upload/v1734088135/6260258633623388354_u22rwh.jpg";
   return (
     <div className="bg-white h-[100dvh]">
       <div className="container mx-auto max-w-[500px] h-full shadow-xl shadow-gray-400 bg-zinc-100 flex flex-col">
