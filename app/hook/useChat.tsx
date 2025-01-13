@@ -18,6 +18,7 @@ export const useChatMessages = () => {
       await fetchAIResponse(input);
     }
   };
+
   const fetchAIResponse = async (userMessage: string) => {
     const token = localStorage.getItem("token");
     try {
@@ -55,10 +56,6 @@ export const useChatMessages = () => {
   };
 
   const fetchToken = async () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      return null;
-    } else {
       try {
         const response = await fetch("/api/token", {
           method: "GET",
@@ -73,7 +70,6 @@ export const useChatMessages = () => {
         }
       } catch (error) {
         console.error("Error fetching AI response:", error);
-      }
     }
   };
 
