@@ -56,7 +56,6 @@ export const useChatMessages = () => {
   };
 
   const fetchToken = async () => {
-//add
     try {
         const response = await fetch("/api/token", {
           method: "GET",
